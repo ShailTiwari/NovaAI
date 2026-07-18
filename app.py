@@ -337,7 +337,7 @@ def apply_custom_styles() -> None:
             }
             div[data-testid="stChatInput"] textarea {
                 background: transparent !important;
-                color: var(--text) !important;
+                color: #000000 !important;
             }
             div[data-testid="stChatInput"] textarea::placeholder {
                 color: var(--muted) !important;
