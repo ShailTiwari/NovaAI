@@ -76,8 +76,32 @@ def apply_custom_styles() -> None:
 
             .block-container {
                 max-width: 1180px;
-                padding-top: 1.4rem;
+                padding-top: 4.1rem;
                 padding-bottom: 3rem;
+            }
+
+            /* Streamlit's own fixed top toolbar (Deploy button, main menu).
+               It's position:fixed above the page, so we theme it to match
+               dark mode and let Streamlit's own header spacer reserve the
+               room for it - our content starts right after, not under it. */
+            header[data-testid="stHeader"] {
+                background: var(--bg) !important;
+                border-bottom: 1px solid var(--border-soft);
+                height: 2.6rem;
+            }
+            div[data-testid="stToolbar"],
+            div[data-testid="stToolbarActions"] {
+                background: transparent !important;
+            }
+            div[data-testid="stToolbar"] svg {
+                fill: var(--muted) !important;
+            }
+            div[data-testid="stToolbar"] button:hover svg {
+                fill: var(--text) !important;
+            }
+            span[data-testid="stMainMenu"] button span,
+            div[data-testid="stAppDeployButton"] button span {
+                color: var(--text) !important;
             }
 
             /* Sidebar */
@@ -94,7 +118,7 @@ def apply_custom_styles() -> None:
             .brand-bar {
                 display: flex;
                 align-items: center;
-                gap: 12px;
+                gap: 20px;
                 padding: 4px 0 22px 0;
                 border-bottom: 1px solid var(--border-soft);
                 margin-bottom: 22px;
@@ -670,7 +694,7 @@ def render_chat_panel(settings) -> None:
         )
         return
 
-    chat_box = st.container(height=560, border=True)
+    chat_box = st.container(height=460, border=True)
     with chat_box:
         render_chat_history()
 
